@@ -1,34 +1,89 @@
+import React, { useContext, useState } from 'react'
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-  } from "@material-tailwind/react";
-   
-  export function CardDefault() {
-    return (
-      <Card className="mt-6 w-96">
-        <CardHeader color="blue-gray" className="relative h-56">
-          <img
-            src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-            alt="card-image"
-          />
-        </CardHeader>
-        <CardBody>
-          <Typography variant="h5" color="blue-gray" className="mb-2">
-            UI/UX Review Check
-          </Typography>
-          <Typography>
-            The place is close to Barceloneta Beach and bus stop just 2 min by
-            walk and near to &quot;Naviglio&quot; where you can enjoy the main
-            night life in Barcelona.
-          </Typography>
-        </CardBody>
-        <CardFooter className="pt-0">
-          <Button>Read More</Button>
-        </CardFooter>
-      </Card>
-    );
+  Card,
+  CardHeader,
+  CardBody,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import CounterApp from './Counter/CounterApp';
+import { CartContext } from './context/CartContext';
+
+
+
+const ItemDetail = ( {item} ) => {
+
+  const { carrito, setCarrito } =useContext(CartContext)
+
+  const [stock, setStock] =useState(1);
+
+  const handleRestar = () => {
+    stock > 1 && setStock(stock - 1)
   }
+
+  const handleSumar = () => {
+    stock < item.stock && setStock(stock + 1)
+  }
+
+  const handleAdd = () => {
+    const appAdd = {...item, stock};
+
+    const newCarrito = [...carrito];
+    const registradoEnCarro = newCarrito.find((producto)=> producto.id === appAdd.id);
+
+      if(registradoEnCarro){
+        registradoEnCarro.stock += stock;
+        setCarrito(newCarrito);
+        console.log(newCarrito);
+      } else {
+        newCarrito.push(appAdd);
+        setCarrito(newCarrito);
+        console.log(newCarrito);   
+        
+    } 
+   
+        
+  }
+
+  return (
+    <Card className="w-full max-w-[48rem] flex-row mt-3">
+      
+    <CardHeader
+      shadow={false}
+      floated={false}
+      className="m-0 w-2/5 shrink-0 rounded-r-none">
+      <img src={item.img} alt={item.name}/>
+    </CardHeader>
+
+        <CardBody>
+          <Typography variant="h4" color="gray" className="mb-4">{item.name} </Typography>
+          <Typography color="gray" className="mb-8" >{item.desc}</Typography>
+          <Typography color="gray" className="">Categoria: {item.categoria}</Typography>
+          <Typography variant="h3">${item.price}</Typography>
+          <CounterApp stock={stock} handleSumar={handleSumar} handleRestar={handleRestar} handleAdd={handleAdd}/>
+
+        </CardBody>
+    </Card>
+  )
+}
+
+export default ItemDetail
+
+
+const [carrito, setCarrito] = useState([]);
+  
+const addCarro = (item, stock) => {
+  const appAdd = {...item, agregado:stock};
+
+  const newCarrito = [...carrito];
+  const registradoEnCarro = newCarrito.find((producto)=> producto.id === appAdd.id);
+
+    if(registradoEnCarro){
+      registradoEnCarro.stock += stock;
+      
+    } else {
+      newCarrito.push(appAdd);       
+  } 
+    setCarrito(newCarrito);
+      console.log(newCarrito);
+}

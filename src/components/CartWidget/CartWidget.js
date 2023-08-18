@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CartIcon from '../CartWidget/assets/CartIcon'
+import { CartContext } from '../context/CartContext'
 
 const CartWidget = () => {
+
+  const { cantidadEnCarrito } = useContext(CartContext);
   return (
     <div className="flex justify-center">
-       <CartIcon/>0
+       <CartIcon/>{cantidadEnCarrito()}
   </div>
   )
 }

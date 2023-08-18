@@ -1,16 +1,17 @@
 import './input.css';
 import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AppMoviles from './components/pages/AppMoviles';
-import PcNotebooks from './components/pages/PcNotebooks';
-import RecienSalidas from './components/pages/RecienSalidas';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
-import Counter from  './components/Counter/Counter';
+import { CartProvider } from './components/context/CartContext';
+import Carrito from './components/Carrito';
+
 function App() {
+
 
   return (
     <div>
+     <CartProvider>
      <BrowserRouter>
 
      <NavBar/>
@@ -19,13 +20,11 @@ function App() {
         <Route path='/item/:id' element={<ItemDetailContainer/>}/>
         <Route path='/aplicaciones' element={<ItemListContainer/>}/>
         <Route path='/aplicaciones/:categoria' element={<ItemListContainer/>}/>
+        <Route path='/carrito' element={<Carrito/>}/>
               
      </Routes>
-
-     
-     
-     <Counter initial={1} stock={7} onAdd={(quantity)=> console.log("Cantidad agregada",quantity)}/>
      </BrowserRouter>
+     </CartProvider> 
     </div>
   );
 }
