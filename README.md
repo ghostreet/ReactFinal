@@ -1,3 +1,14 @@
+# Esta app se levanto con Create React App
+
+se utilizo en ella tailwinds y material tailwinds para darle diseño de manera rapida,
+en los iconos de uso Heroicons de la misma libreria.
+
+la funcionalidad se basa en un e-commerce típico, permitiendonos ver articulos por categoria, poder ahondar en su detalle con descripción
+y desdde ahí hacer el proceso de compra, agregando al carro, para luego proceder al checkout mediante la información contenida en el carrito
+aqui se nos da la opción de comprar o vaciar al carrito, si compras la app te devolvera un mensaje con tu Id de pedido, dando por finalizada la compra,
+en caso contrario puedes vaciar el carro y comenzar denuevo.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
