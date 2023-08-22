@@ -1,3 +1,4 @@
+import { Button } from '@material-tailwind/react'
 import React from 'react'
 
 const CounterApp = ( {cantidad, handleRestar, handleSumar, handleAdd} )=> {
@@ -9,7 +10,7 @@ const CounterApp = ( {cantidad, handleRestar, handleSumar, handleAdd} )=> {
           <p>{cantidad}</p>
           <button onClick={handleSumar}>+</button>    
         </div>
-          <button onClick={handleAdd}>Agregar al carrito</button>
+          <Button onClick={handleAdd}>Agregar al carrito</Button>
     </div>
     )
 
